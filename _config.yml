@@ -16,10 +16,10 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Nothing"
+title                    : "Life Achievement"
 title_separator          : "-"
-name                     : "Nothing"
-description              : "Nothing"
+name                     : "Life Achievement"
+description              : "Achievement what I did"
 url                      : "https://Nochiski.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "Nochiski/Nochiski.github.io"
@@ -109,7 +109,7 @@ author:
   name             : "Sangmok Han"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Computer Science UB 2019 ~"
-  location         : "Seoul, Korea / Buffalo, US"
+  location         : "[Seoul, Korea] / [Buffalo, US]"
   email            : "sangmok112@gmail.com"
   links:
     - label: "Email"

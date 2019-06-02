@@ -49,8 +49,28 @@ free()를 사용해 힙 영역에 할당된 메모리를 해제합니다.
 
  4096(2<sup>12</sup>)바이트만큼의 메모리를 얻어온 후(구현에 따라 차이가 있을 수 있습니다), 그 4096바이트의 메모리를 일정하게 2의 제곱수(2,4,8,32,64 ... )로 나눠 연결리스트(Linked List)를 생성합니다. <br>
 
- 이것을 자유리스트(Free List) 또는 자유체인(Free Chain)이라고 부릅니다. 예를들면 64바이트의 블록을 요청할때는 64개의 64바이트 블록이 생성됩니다. 이 메모리블록들은 메모리가 할당되면 연결리스트에서 삭제(remove)되며, 메모리가 해제된 후에 다시 연결리스트로 편입(append)됩니다. <br>
+ ![freelist](https://drive.google.com/uc?id=1xQEAqwViSuI709jDkhJnZvaWWyTmfJtU)
+
+ 이것을 자유리스트(Free List) 또는 자유체인(Free Chain)이라고 부릅니다. 예를들면 64바이트의 블록을 요청할때는 64개의 64바이트 블록이 생성됩니다. 이 메모리블록들은 메모리가 할당되면 연결리스트에서 삭제(remove)되며, 메모리가 해제된 후에 다시 연결리스트로 편입(append)됩니다. 동적할당자가 호출될때, 이 자유리스트에 적절하게 남은 공간이 존재하는 한, 새로 메모리를 OS에서 할당받지 않고 연결리스트에서 미리 할당받은 메모리를 얻어옵니다. <br>
+
+ ![freelist2](https://drive.google.com/uc?id=1T_e4Xd6bunHMDwJcLregzRv9D83WISga)
+
+ 또한 void*형 배열에 자유리스트 헤더의 주솟값을 저장합니다. 이 배열은 자유리스트의 탐색에 사용됩니다.
+
+ ![freearray](https://drive.google.com/uc?id=1jStDLgNzI5f8e2YYImuYx2kuFrAf7SIw)
 
  malloc을 통해 메모리가 요청될때에는 실제보다 8바이트 더 큰 사이즈를 할당받습니다. 맨 앞의 8바이트는 메모리의 크기를 나타내는 헤더(header)로서 사용됩니다.<br>
 
+ ![header](https://drive.google.com/uc?id=1yeOY_8F07VhCSHwq85AeNX0Pp6w8Zm1I)
+
+ 만약 변수의 실제 사이즈가 할당되어있는 사이즈보다 작을시, 나머지는 사용하지않고 비워둡니다(padding).
+
+ ![padding](https://drive.google.com/uc?id=1ugDe2WZwsCOZWzQFUbdCQVpl8Ogu7CET)
+
  예를들면, 35바이트의 메모리를 할당해올때 얻어지는 실제 사이즈는 43바이트입니다. 또한 43바이트는 36(2<sup>5</sup>)보다 크지만 64(2<sup>6</sup>)보다 작으므로, 64만큼의 크기의 블록에 할당됩니다. 이 블록은 할당과 동시에 자유 리스트에서 삭제되며, 메모리가 해제될 때 다시 자유리스트로 추가됩니다.
+
+---
+### 요약
+  * C는 malloc, calloc, realloc으로 메모리를 할당한다.
+  * free로 할당된 메모리를 해제할 수 있다.
+  * 각 동적할당자가 호출될때, 한번에 많은 메모리를 할당받은 이후, 자유리스트가 비워져 있는한

@@ -1,6 +1,6 @@
 ---
 layout: posts
-title: Introduce to Manage Memory in Linux
+title: Introduce to Memory Management in Linux
 #category: C/C++
 #tags: [C++, C, Memory]
 ---
